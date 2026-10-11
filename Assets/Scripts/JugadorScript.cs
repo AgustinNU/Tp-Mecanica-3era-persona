@@ -8,7 +8,7 @@ public class JugadorScript : MonoBehaviour
     public float speed = 5f;
     public Rigidbody rb;
     public float jumpForce = 10f;
-    public bool canJump = true;
+    public bool isGrounded = true;
 
     void Start()
     {
@@ -36,10 +36,10 @@ public class JugadorScript : MonoBehaviour
             rb.AddForce(new Vector3(speed, 0, 0));
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-            canJump = false;
+            isGrounded = false;
         }
     }
 
@@ -47,7 +47,7 @@ public class JugadorScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            canJump = true;
+            isGrounded = true;
         }
 
     }
